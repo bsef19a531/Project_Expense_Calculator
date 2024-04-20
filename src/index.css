@@ -1,12 +1,19 @@
 :root {
   --white: #fff;
-  --light-gray: #cfcfcf;
+  --light-gray: #e0e0e0;
   --dark-gray: #212121;
+  --danger: #f44336;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+
 }
 
 body {
-  margin: 0;
-  padding: 0;
   background-color: var(--white);
   font-family: 'Poppins', sans-serif;
+  color: var(--dark-gray);
 }

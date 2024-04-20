@@ -1,0 +1,47 @@
+.title {
+    font-weight: 600;
+    margin: 0px 20px;
+}
+
+.proj_container {
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 20px;
+    margin: 20px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.menu_btn {
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--dark-gray);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.input_field {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-gray);
+    margin: 10px 0px;
+    width: 400px;
+}
+
+.btn_container {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.btn_container button {
+    margin: 5px 0px;
+}
+
+.btn_red {
+    background-color: var(--danger);
+}

@@ -1,0 +1,14 @@
+.top_header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--white);
+    min-height: 72px;
+    width: 100vw;
+}
+
+.top_header h1 {
+    font-size: 32px;
+    font-weight: 600;
+    color: var(--dark-gray);
+}
