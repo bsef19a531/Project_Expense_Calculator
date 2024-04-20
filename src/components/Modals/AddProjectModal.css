@@ -1,0 +1,58 @@
+.add_project_modal {
+    margin: 0;
+    width: 50%;
+    background-color: var(--light-gray);
+    position: fixed;
+    top: 50%;
+    /* Center vertically */
+    left: 50%;
+    /* Center horizontally */
+    transform: translate(-50%, -50%);
+    /* Move the modal back by half of its own width and height */
+    border-radius: 10px;
+}
+
+.modal_header {
+    height: 80px;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.project_name_input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-gray);
+    margin: 10px 0px;
+    width: 400px;
+}
+
+.modal_btn {
+    font-weight: 500;
+    color: var(--white);
+    background-color: var(--dark-gray);
+    padding: 10px 20px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.modal_body {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px;
+}
+
+.close_btn {
+    background-color: var(--danger);
+    border-radius: 100%;
+    padding: auto;
+    color: var(--white);
+    padding: 10px 16px;
+    cursor: pointer;
+    border: none;
+}

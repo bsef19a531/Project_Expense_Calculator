@@ -1,0 +1,42 @@
+{
+    "projects": [
+        {
+            "name": "Project 1",
+            "status": "Active",
+            "startDate": "2022-04-26",
+            "expenses": [
+                {
+                    "amount": 100,
+                    "date": "2022-04-27",
+                    "payee": "John Doe",
+                    "category": "Food"
+                },
+                {
+                    "amount": 50,
+                    "date": "2022-04-28",
+                    "payee": "Jane Smith",
+                    "category": "Transportation"
+                }
+            ]
+        },
+        {
+            "name": "Project 2",
+            "status": "Inactive",
+            "startDate": "2022-05-10",
+            "expenses": [
+                {
+                    "amount": 200,
+                    "date": "2022-05-12",
+                    "payee": "Alice Johnson",
+                    "category": "Entertainment"
+                }
+            ]
+        },
+        {
+            "name": "Project 3",
+            "status": "Active",
+            "startDate": "2022-05-15",
+            "expenses": []
+        }
+    ]
+}
