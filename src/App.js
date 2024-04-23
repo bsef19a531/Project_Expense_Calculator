@@ -17,8 +17,6 @@ function App() {
   }, [dispatch]); // Empty dependency array ensures fetching only on mount
 
   const loading = useSelector((state) => state.projects.loading);
-  const projects = useSelector((state) => state.projects.projects);
-  console.log(projects);
 
   return (
     loading ? <Loader /> :

@@ -1,14 +1,25 @@
 import React from 'react'
 import styles from './Home.module.css'
+import { useSelector } from 'react-redux'
 
 const Home = () => {
+
+    const selectedProjectId = useSelector((state) => state.selectedProject.selectedProjectId);
+    const projects = useSelector((state) => state.projects.projects);
+    const selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
+
     return (
         <div>
             <h3 className={styles.title}>Expense Project</h3>
             <div className={styles.proj_container}>
-                <div><b>Title:</b> {"Demo1"} </div>
-                <div><b>Status:</b> {"Ongoing"} </div>
-                <div><b>Start Date:</b> {"12-08-2024"} </div>
+                {
+                    !selectedProject ? <div>Loading...</div> : <>
+                        <div><b>Title:</b> {selectedProject.name} </div>
+                        <div><b>Status:</b> {selectedProject.status} </div>
+                        <div><b>Start Date:</b> {selectedProject.startDate} </div>
+                    </>
+                }
+
             </div>
 
             <h3 className={styles.title}>Project Actions</h3>

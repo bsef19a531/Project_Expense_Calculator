@@ -1,10 +1,15 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import styles from './SideHeader.module.css';
 import logo from '../../assets/cal-logo.jpg';
 import { Link } from 'react-router-dom';
 import AddProjectModal from '../Modals/AddProjectModal';
+import { useSelector } from 'react-redux';
+import { setSelectedProject as setSelectedProjectId } from '../../redux/selectedProjectSlice';
+import { useDispatch } from 'react-redux';
 
 const SideHeader = () => {
+    const dispatch = useDispatch();
+
     const [isModalOpen, setIsModalOpen] = useState(false);
 
     const openModal = () => {
@@ -19,6 +24,30 @@ const SideHeader = () => {
         console.log('Creating project:', projectName);
 
     };
+
+    const projects = useSelector((state) => state.projects.projects);
+    const selectedProjectId = useSelector((state) => state.selectedProject.selectedProjectId);
+    const [selectedProject, setSelectedProject] = useState(projects[0]?.name || 'None');
+
+    useEffect(() => {
+        // Handle potential situations where projects might be empty initially
+        if (projects.length > 0 && !selectedProject) {
+            setSelectedProject(projects[0].name);
+        }
+        if (selectedProject !== 'None') {
+            dispatch(setSelectedProjectId(projects.filter(project => selectedProject === selectedProject)[0].id));
+            console.log('Selected project from useEffect:', selectedProjectId);
+        }
+    }, [projects]);
+
+
+    const handleProjectChange = (event) => {
+        setSelectedProject(event.target.value);
+        console.log('Selected project:', selectedProject);
+        dispatch(setSelectedProjectId(event.target.value)); // Use selectedProject as ID directly
+        console.log('Selected projectId:', selectedProjectId);
+    };
+
 
     return (
         <div className={styles.container}>
@@ -49,14 +78,17 @@ const SideHeader = () => {
                 />
 
                 <button className={styles.menu_btn}>Edit Project</button>
+
                 <div>
-                    <select>
-                        <option key={1} value="">Select Project</option>
-                        <option key={2} value="1">Project 1</option>
-                        <option key={3} value="2">Project 2</option>
-                        <option key={4} value="3">Project 3</option>
+                    <select value={selectedProject} onChange={handleProjectChange}>
+                        {projects.map((project) => (
+                            <option key={project.id} value={project.id}>
+                                {project.name}
+                            </option>
+                        ))}
                     </select>
                 </div>
+
                 <button className={styles.menu_btn}>Select Project</button>
             </div>
         </div>
