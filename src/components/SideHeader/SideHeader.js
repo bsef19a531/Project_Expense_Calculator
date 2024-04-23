@@ -79,8 +79,9 @@ const SideHeader = () => {
 
                 <button className={styles.menu_btn}>Edit Project</button>
 
+                <p>*Select Project</p>
                 <div>
-                    <select value={selectedProject} onChange={handleProjectChange}>
+                    <select value={selectedProject} onChange={handleProjectChange} className={styles.select_menu}>
                         {projects.map((project) => (
                             <option key={project.id} value={project.id}>
                                 {project.name}
@@ -89,7 +90,6 @@ const SideHeader = () => {
                     </select>
                 </div>
 
-                <button className={styles.menu_btn}>Select Project</button>
             </div>
         </div>
     );

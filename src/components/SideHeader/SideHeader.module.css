@@ -67,3 +67,12 @@
     cursor: pointer;
     margin: 10px 0px;
 }
+
+.select_menu {
+    width: 100%;
+    border: var(--dark-gray);
+    height: 36px;
+    background-color: var(--white);
+    text-align: center;
+    box-shadow: 0px 2px;
+}
