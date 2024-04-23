@@ -43,9 +43,7 @@ const SideHeader = () => {
 
     const handleProjectChange = (event) => {
         setSelectedProject(event.target.value);
-        console.log('Selected project:', selectedProject);
         dispatch(setSelectedProjectId(event.target.value)); // Use selectedProject as ID directly
-        console.log('Selected projectId:', selectedProjectId);
     };
 
 

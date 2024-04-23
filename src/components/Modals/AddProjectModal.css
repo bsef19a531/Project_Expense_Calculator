@@ -38,6 +38,7 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
+    margin-left: 10px;
 }
 
 .modal_body {
