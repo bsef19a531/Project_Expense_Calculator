@@ -3,29 +3,34 @@ import ContentArea from './components/ContentArea/ContentArea';
 import SideHeader from './components/SideHeader/SideHeader';
 import TopHeader from './components/TopHeader/TopHeader';
 import { BrowserRouter as Router } from 'react-router-dom';
-import { fetchData } from './utils/projectFunction';
 import { useEffect, useState } from 'react';
-
+import Loader from './components/Loader/Loader';
+import { useDispatch } from 'react-redux';
+import { fetchProjects } from './redux/projectsActions';
+import { useSelector } from 'react-redux';
 
 function App() {
-  const [projects, setProjects] = useState([]);
+  const dispatch = useDispatch();
+
   useEffect(() => {
-    fetchData().then((projects) => {
-      setProjects(projects);
-      // console.log(projects);
-    });
-  }, []);
+    dispatch(fetchProjects());
+  }, [dispatch]); // Empty dependency array ensures fetching only on mount
+
+  const loading = useSelector((state) => state.projects.loading);
+  const projects = useSelector((state) => state.projects.projects);
+  console.log(projects);
 
   return (
-    <Router>
-      <div className="app-container">
-        <TopHeader />
-        <div className='page-area'>
-          <SideHeader />
-          <ContentArea />
+    loading ? <Loader /> :
+      <Router>
+        <div className="app-container">
+          <TopHeader />
+          <div className='page-area'>
+            <SideHeader />
+            <ContentArea />
+          </div>
         </div>
-      </div>
-    </Router>
+      </Router>
   );
 }
 
