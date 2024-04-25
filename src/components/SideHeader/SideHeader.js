@@ -2,10 +2,12 @@ import React, { useState, useEffect } from 'react';
 import styles from './SideHeader.module.css';
 import logo from '../../assets/cal-logo.jpg';
 import { Link } from 'react-router-dom';
-import AddProjectModal from '../Modals/AddProjectModal';
+import CustomModal from '../Modals/CustomModal';
 import { useSelector } from 'react-redux';
 import { setSelectedProject as setSelectedProjectId } from '../../redux/selectedProjectSlice';
 import { useDispatch } from 'react-redux';
+import { saveProjects } from '../../redux/projectsSlice';
+import { createProject, storeProjectsLocally } from '../../utils/handleProjectsLocal';
 
 const SideHeader = () => {
     const dispatch = useDispatch();
@@ -21,7 +23,11 @@ const SideHeader = () => {
     };
 
     const handleCreateProject = (projectName) => {
-        console.log('Creating project:', projectName);
+
+        const newProject = createProject(projectName);
+        storeProjectsLocally(newProject);
+
+        dispatch(saveProjects([...projects, newProject]));
 
     };
 
@@ -36,7 +42,6 @@ const SideHeader = () => {
         }
         if (selectedProject !== 'None') {
             dispatch(setSelectedProjectId(projects.filter(project => selectedProject === selectedProject)[0].id));
-            console.log('Selected project from useEffect:', selectedProjectId);
         }
     }, [projects]);
 
@@ -69,10 +74,12 @@ const SideHeader = () => {
                 <p>*Actions</p>
                 <button className={styles.menu_btn} onClick={openModal}>Add Project</button>
 
-                <AddProjectModal
+                <CustomModal
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     onCreateProject={handleCreateProject}
+                    heading="Add Project"
+                    palceholder="Enter Project Name"
                 />
 
                 <button className={styles.menu_btn}>Edit Project</button>
