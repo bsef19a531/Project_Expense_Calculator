@@ -5,6 +5,16 @@
             "name": "Project 1",
             "status": "Active",
             "startDate": "2022-04-26",
+            "categories": [
+                "Food",
+                "Transportation",
+                "Entertainment"
+            ],
+            "payees": [
+                "John Doe",
+                "Jane Smith",
+                "Alice Johnson"
+            ],
             "expenses": [
                 {
                     "amount": 100,

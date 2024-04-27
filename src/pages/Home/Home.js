@@ -3,9 +3,9 @@ import styles from './Home.module.css'
 import { updateProjectPayees, updateProjectCategories, updateProjectLocally, deleteProjectCategory, deleteProjectPayee } from '../../utils/handleProjectsLocal'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveProjects } from '../../redux/projectsSlice'
-import { setSelectedProject } from '../../redux/selectedProjectSlice'
 import { capitalizeString } from '../../utils/generalFunctions'
 import CustomSelectorModal from '../../components/Modals/CustomSelectorModal'
+import ExpenseModal from '../../components/Modals/ExpenseModal'
 
 const Home = () => {
 
@@ -41,6 +41,7 @@ const Home = () => {
 
     const [isModalOpenCategory, setIsModalOpenCategory] = useState(false);
     const [isModalOpenPayee, setIsModalOpenPayee] = useState(false);
+    const [isExpenseModalOpen, setIsExpenseModalOpen] = useState(false);
 
     const openModalCategory = () => {
         setIsModalOpenCategory(true);
@@ -58,6 +59,14 @@ const Home = () => {
         setIsModalOpenPayee(false);
     };
 
+    const openExpenseModal = () => {
+        setIsExpenseModalOpen(true);
+    };
+
+    const closeExpenseModal = () => {
+        setIsExpenseModalOpen(false);
+    };
+
     const handleDeleteCategory = (category) => {
         const updatedProject = deleteProjectCategory(selectedProject, category);
         const updatedProjects = updateProjectLocally(updatedProject);
@@ -67,6 +76,10 @@ const Home = () => {
         const updatedProject = deleteProjectPayee(selectedProject, payee);
         const updatedProjects = updateProjectLocally(updatedProject);
         dispatch(saveProjects(updatedProjects));
+    }
+
+    const handleAddExpense = (expense) => {
+        console.log("handleAddExpense", expense);
     }
 
     return (
@@ -108,7 +121,7 @@ const Home = () => {
             </div>
             <div className={styles.proj_container}>
                 <h3 className={styles.title}>Add New Expense</h3>
-                <button className={styles.menu_btn}>Add Expense</button>
+                <button className={styles.menu_btn} onClick={openExpenseModal} >Add Expense</button>
             </div>
 
             {/* Delete Category Modal*/}
@@ -128,6 +141,9 @@ const Home = () => {
                 heading="Delete Payee"
                 selector="payee"
             />
+
+            {/* Modal for Add Expense */}
+            {isExpenseModalOpen && <ExpenseModal isOpen={isExpenseModalOpen} onClose={closeExpenseModal} handler={handleAddExpense} />}
 
         </div>
     )

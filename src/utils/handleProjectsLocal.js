@@ -46,6 +46,12 @@ export const deleteProjectPayee = (project, payee) => {
     return { ...project, payees: project.payees.filter(pay => pay !== payee) };
 };
 
+export const addExpenseToProject = (project, expense) => {
+    let presentExpenses = project.expenses;
+    presentExpenses = [...presentExpenses, expense];
+    return { ...project, expenses: presentExpenses };
+};
+
 export const updateProjectLocally = (updatedProject) => {
     let projects = JSON.parse(localStorage.getItem("projects")) || [];
 
