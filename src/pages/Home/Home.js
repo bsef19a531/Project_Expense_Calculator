@@ -1,15 +1,24 @@
 import React, { useState } from 'react'
 import styles from './Home.module.css'
-import { updateProjectPayees, updateProjectCategories, updateProjectLocally } from '../../utils/handleProjectsLocal'
+import { updateProjectPayees, updateProjectCategories, updateProjectLocally, deleteProjectCategory, deleteProjectPayee } from '../../utils/handleProjectsLocal'
 import { useDispatch, useSelector } from 'react-redux'
 import { saveProjects } from '../../redux/projectsSlice'
+import { setSelectedProject } from '../../redux/selectedProjectSlice'
 import { capitalizeString } from '../../utils/generalFunctions'
+import CustomSelectorModal from '../../components/Modals/CustomSelectorModal'
+
 const Home = () => {
+
+    // console.log("Home");
 
     const dispatch = useDispatch();
     const selectedProjectId = useSelector((state) => state.selectedProject.selectedProjectId);
     const projects = useSelector((state) => state.projects.projects);
     const selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
+
+    // console.log("Home selectedProject", selectedProject);
+    // console.log("Home selectedProjectId", selectedProjectId);
+    // console.log("Home projects", projects);
 
     const [category, setCategory] = useState('');
     const handleAddCategory = () => {
@@ -22,11 +31,42 @@ const Home = () => {
 
     const [payee, setPayee] = useState('');
     const handleAddPayee = () => {
+        console.log("handleAddPayee");
         const capitalizedCategory = capitalizeString(payee);
         const updatedProject = updateProjectPayees(selectedProject, capitalizedCategory);
         const updatedProjects = updateProjectLocally(updatedProject);
         dispatch(saveProjects(updatedProjects));
         setPayee('');
+    }
+
+    const [isModalOpenCategory, setIsModalOpenCategory] = useState(false);
+    const [isModalOpenPayee, setIsModalOpenPayee] = useState(false);
+
+    const openModalCategory = () => {
+        setIsModalOpenCategory(true);
+    };
+
+    const closeModalCategory = () => {
+        setIsModalOpenCategory(false);
+    };
+
+    const openModalPayee = () => {
+        setIsModalOpenPayee(true);
+    };
+
+    const closeModalPayee = () => {
+        setIsModalOpenPayee(false);
+    };
+
+    const handleDeleteCategory = (category) => {
+        const updatedProject = deleteProjectCategory(selectedProject, category);
+        const updatedProjects = updateProjectLocally(updatedProject);
+        dispatch(saveProjects(updatedProjects));
+    }
+    const handleDeletePayee = (payee) => {
+        const updatedProject = deleteProjectPayee(selectedProject, payee);
+        const updatedProjects = updateProjectLocally(updatedProject);
+        dispatch(saveProjects(updatedProjects));
     }
 
     return (
@@ -51,7 +91,7 @@ const Home = () => {
                 </div>
                 <div className={styles.btn_container}>
                     <button className={styles.menu_btn} onClick={handleAddCategory}>Add Category</button>
-                    <button className={`${styles.menu_btn} ${styles.btn_red}`}>Delete Category</button>
+                    <button onClick={openModalCategory} className={`${styles.menu_btn} ${styles.btn_red}`}>Delete Category</button>
                 </div>
             </div>
 
@@ -62,7 +102,7 @@ const Home = () => {
                 </div>
                 <div className={styles.btn_container}>
                     <button onClick={handleAddPayee} className={styles.menu_btn}>Add Payee</button>
-                    <button className={`${styles.menu_btn} ${styles.btn_red}`}>Delete Payee</button>
+                    <button onClick={openModalPayee} className={`${styles.menu_btn} ${styles.btn_red}`}>Delete Payee</button>
                 </div>
 
             </div>
@@ -70,6 +110,24 @@ const Home = () => {
                 <h3 className={styles.title}>Add New Expense</h3>
                 <button className={styles.menu_btn}>Add Expense</button>
             </div>
+
+            {/* Delete Category Modal*/}
+            <CustomSelectorModal
+                isOpen={isModalOpenCategory}
+                onClose={closeModalCategory}
+                handler={handleDeleteCategory}
+                heading="Delete Category"
+                selector="category"
+            />
+
+            {/* Modal for Delete Payee */}
+            <CustomSelectorModal
+                isOpen={isModalOpenPayee}
+                onClose={closeModalPayee}
+                handler={handleDeletePayee}
+                heading="Delete Payee"
+                selector="payee"
+            />
 
         </div>
     )

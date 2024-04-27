@@ -57,3 +57,16 @@
     cursor: pointer;
     border: none;
 }
+
+.bg_danger {
+    background-color: var(--danger);
+}
+
+.modal_select_menu {
+    width: 100%;
+    border: var(--dark-gray);
+    height: 36px;
+    background-color: var(--white);
+    text-align: center;
+    box-shadow: 0px 2px;
+}

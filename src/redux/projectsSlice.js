@@ -9,9 +9,6 @@ const projectsSlice = createSlice({
     name: 'projects',
     initialState,
     reducers: {
-        addProject: (state, action) => {
-            // state.projects.push(action.payload);
-        },
         saveProjects: (state, action) => {
             state.projects = action.payload;
         }

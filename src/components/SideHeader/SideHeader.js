@@ -10,6 +10,7 @@ import { saveProjects } from '../../redux/projectsSlice';
 import { createProject, storeProjectsLocally } from '../../utils/handleProjectsLocal';
 
 const SideHeader = () => {
+    // console.log("SideHeader");
     const dispatch = useDispatch();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
@@ -23,34 +24,32 @@ const SideHeader = () => {
     };
 
     const handleCreateProject = (projectName) => {
-
         const newProject = createProject(projectName);
         storeProjectsLocally(newProject);
-
         dispatch(saveProjects([...projects, newProject]));
-
     };
 
     const projects = useSelector((state) => state.projects.projects);
     const selectedProjectId = useSelector((state) => state.selectedProject.selectedProjectId);
-    const [selectedProject, setSelectedProject] = useState(projects[0]?.name || 'None');
+
+    const [selectedProject, setSelectedProject] = useState(
+        selectedProjectId ? projects.filter(project => project.id === selectedProjectId)[0]?.name || 'None' : ''
+    );
 
     useEffect(() => {
-        // Handle potential situations where projects might be empty initially
-        if (projects.length > 0 && !selectedProject) {
-            setSelectedProject(projects[0].name);
-        }
-        if (selectedProject !== 'None') {
-            dispatch(setSelectedProjectId(projects.filter(project => selectedProject === selectedProject)[0].id));
-        }
-    }, [projects]);
+        let projectToSave = projects.filter(project => selectedProject == project.id)[0]?.id || projects[0]?.id;
 
+        dispatch(setSelectedProjectId(projectToSave)); // Update ID based on selectedProject
+    }, [projects]);
 
     const handleProjectChange = (event) => {
         setSelectedProject(event.target.value);
         dispatch(setSelectedProjectId(event.target.value)); // Use selectedProject as ID directly
     };
 
+    // console.log("SideHeader selectedProject", selectedProject);
+    // console.log("SideHeader selectedProjectId", selectedProjectId);
+    // console.log("SideHeader projects", projects);
 
     return (
         <div className={styles.container}>
@@ -94,7 +93,6 @@ const SideHeader = () => {
                         ))}
                     </select>
                 </div>
-
             </div>
         </div>
     );

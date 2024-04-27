@@ -30,7 +30,7 @@ function App() {
     }
   }, [projects]);
 
-  console.log(projects);
+  // console.log("App");
   return (
     loading ? <Loader /> :
       <Router>
