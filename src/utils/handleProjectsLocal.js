@@ -67,3 +67,15 @@ export const updateProjectLocally = (updatedProject) => {
     return projects;
 }
 
+export const calculateProjectTotalExpense = (project) => {
+    if (!project.expenses) return 0;
+    let totalAmount = 0;
+    project.expenses.forEach(expense => {
+        totalAmount += Number(expense.amount);
+    });
+    return totalAmount.toLocaleString('en-IN', {
+        maximumFractionDigits: 2, // Specify decimal places
+        minimumFractionDigits: 2, // Ensure at least 2 decimal places (avoid trailing zeroes)
+        grouping: true, // Enable grouping
+    });
+}

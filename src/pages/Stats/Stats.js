@@ -1,8 +1,13 @@
 import React from 'react'
+import styles from './Stats.module.css'
+import ExpenseLoanInfoCard from '../../components/ExpenseLoanInfoCard/ExpenseLoanInfoCard'
 
 const Stats = () => {
     return (
-        <div>Stats</div>
+        <>
+            <h2 className={styles.title} >Stats</h2>
+            <ExpenseLoanInfoCard />
+        </>
     )
 }
 
