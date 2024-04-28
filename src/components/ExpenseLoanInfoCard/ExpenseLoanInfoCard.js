@@ -30,7 +30,7 @@ const ExpenseLoanInfoCard = () => {
 
                     <div>
                         <h3 className={styles.title}>Project Title</h3>
-                        <h1 className={styles.title} >{selectedProject.name}</h1>
+                        <h1 className={styles.title} >{selectedProject?.name}</h1>
                     </div>
                 </div>
                 <div className={styles.proj_container}>
