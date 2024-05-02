@@ -17,8 +17,6 @@ const ExpenseLoanInfoCard = () => {
         }
     }, [selectedProjectId, selectedProject, projects]);
 
-    console.log("selectedProject", selectedProject);
-
     return (
         <div className={styles.contianer}>
             <div className={styles.expense_container}>
