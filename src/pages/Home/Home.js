@@ -91,6 +91,7 @@ const Home = () => {
                         <div><b>Title:</b> {selectedProject.name} </div>
                         <div><b>Status:</b> {selectedProject.status} </div>
                         <div><b>Start Date:</b> {selectedProject.startDate} </div>
+                        {selectedProject.endDate ? <div><b>End Date:</b> {selectedProject.endDate} </div> : null}
                     </>
                 }
 

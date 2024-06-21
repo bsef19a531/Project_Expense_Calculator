@@ -1,7 +1,6 @@
 import React from 'react'
 import Modal from 'react-modal'
 import './CustomModal.css'
-import './ExpenseModal.css'
 import { useSelector } from 'react-redux'
 import { useState } from 'react'
 import DatePicker from 'react-datepicker'

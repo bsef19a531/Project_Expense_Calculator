@@ -3,6 +3,7 @@ import styles from './SideHeader.module.css';
 import logo from '../../assets/cal-logo.jpg';
 import { Link } from 'react-router-dom';
 import CustomModal from '../Modals/CustomModal';
+import EditProjectModal from '../Modals/EditProjectModal';
 import { useSelector } from 'react-redux';
 import { setSelectedProject as setSelectedProjectId } from '../../redux/selectedProjectSlice';
 import { useDispatch } from 'react-redux';
@@ -14,6 +15,7 @@ const SideHeader = () => {
     const dispatch = useDispatch();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -21,6 +23,10 @@ const SideHeader = () => {
 
     const closeModal = () => {
         setIsModalOpen(false);
+    };
+
+    const openEditModal = () => {
+        setIsEditModalOpen(true);
     };
 
     const handleCreateProject = (projectName) => {
@@ -81,7 +87,9 @@ const SideHeader = () => {
                     palceholder="Enter Project Name"
                 />
 
-                <button className={styles.menu_btn}>Edit Project</button>
+                <button className={styles.menu_btn} onClick={openEditModal}>Edit Project</button>
+
+                <EditProjectModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
 
                 <p>*Select Project</p>
                 <div>

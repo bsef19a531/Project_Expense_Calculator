@@ -5,6 +5,7 @@ export const createProject = (name) => {
         name,
         status: "Active",
         startDate: new Date().toISOString().slice(0, 10),
+        endDate: null,
         expenses: [],
         categories: [],
         payees: []
