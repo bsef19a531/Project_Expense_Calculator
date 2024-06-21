@@ -6,7 +6,8 @@ import ExpensePieChart from '../../components/Charts/ExpensePieChart'
 import ExpenseLineChart from '../../components/Charts/ExpenseLineChart'
 import { useSelector } from 'react-redux'
 import { useEffect, useState } from 'react'
-import { getCategorywiseTotalExpense, getExpenseTrendsData } from '../../utils/chartCalculations';
+import { getCategorywiseTotalExpense, getExpenseTrendsData, getCategorywiseMonthlyExpense } from '../../utils/chartCalculations';
+import ExpenseBarChart from '../../components/Charts/ExpenseBarChart'
 
 const Stats = () => {
 
@@ -15,17 +16,20 @@ const Stats = () => {
     let selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
     const [pieChartData, setPieChartData] = useState(getCategorywiseTotalExpense(selectedProject ? selectedProject : {}));
     const [lineChartData, setLineChartData] = useState(getExpenseTrendsData(selectedProject ? selectedProject : {}));
+    const [barChartData, setBarChartData] = useState(getExpenseTrendsData(selectedProject ? selectedProject : {}));
 
     useEffect(() => {
         selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
         setPieChartData(getCategorywiseTotalExpense(selectedProject ? selectedProject : {}));
         setLineChartData(getExpenseTrendsData(selectedProject ? selectedProject : {}));
+        setBarChartData(getCategorywiseMonthlyExpense(selectedProject ? selectedProject : {}));
     }, [selectedProjectId, projects]);
 
 
     console.log('selectedProject', selectedProject);
     console.log('pieChartData', pieChartData);
     console.log('lineChartData', lineChartData);
+    console.log('barChartData', barChartData);
 
     return (
         <>
@@ -34,6 +38,7 @@ const Stats = () => {
             <ExpenseTable />
             <ExpensePieChart data={pieChartData} />
             <ExpenseLineChart data={lineChartData} />
+            <ExpenseBarChart data={barChartData} />
         </>
     )
 }

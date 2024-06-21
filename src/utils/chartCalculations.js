@@ -74,3 +74,47 @@ export const getExpenseTrendsData = (project) => {
 
     return chartData;
 };
+
+export const getCategorywiseMonthlyExpense = (project) => {
+    if (!project || !project.expenses || project.expenses.length === 0) {
+        return [];
+    }
+
+    // Function to format date as 'Month YY' and to get a sortable date key
+    function formatDate(dateStr) {
+        const date = new Date(dateStr);
+        const month = date.toLocaleString('default', { month: 'short' });
+        const year = date.getFullYear().toString().slice(-2);
+        return {
+            formatted: `${month} ${year}`,
+            sortable: `${date.getFullYear()}-${date.getMonth()}`
+        };
+    }
+
+    // Initialize an object to store aggregated expenses
+    const aggregatedExpenses = {};
+
+    // Loop through each expense and aggregate the data
+    project.expenses.forEach(expense => {
+        const { formatted, sortable } = formatDate(expense.date);
+        const category = expense.category;
+        const amount = parseFloat(expense.amount) || 0;
+
+        if (!aggregatedExpenses[sortable]) {
+            aggregatedExpenses[sortable] = { name: formatted };
+        }
+
+        if (!aggregatedExpenses[sortable][category]) {
+            aggregatedExpenses[sortable][category] = 0;
+        }
+
+        aggregatedExpenses[sortable][category] += amount;
+    });
+
+    // Convert the aggregated expenses object into an array and sort by month
+    const formattedData = Object.keys(aggregatedExpenses)
+        .sort() // Sort keys to ensure chronological order
+        .map(key => aggregatedExpenses[key]);
+
+    return formattedData;
+}

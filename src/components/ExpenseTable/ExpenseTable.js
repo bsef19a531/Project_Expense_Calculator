@@ -168,8 +168,8 @@ const ExpenseTable = () => {
                 <table className='expense_table'>
                     <thead>
                         <tr>
-                            <th>Amount</th>
                             <th>Date</th>
+                            <th>Amount</th>
                             <th>Category</th>
                             <th>Payee</th>
                             <th>Action</th>
@@ -179,8 +179,8 @@ const ExpenseTable = () => {
                         {
                             filteredExpenses.length > 0 ? filteredExpenses.map((expense) => (
                                 <tr key={expense.id}>
-                                    <td>{expense.amount}</td>
                                     <td>{expense.date}</td>
+                                    <td>{expense.amount}</td>
                                     <td>{expense.category}</td>
                                     <td>{expense.payee}</td>
                                     <td>
