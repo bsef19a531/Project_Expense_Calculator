@@ -5,6 +5,7 @@ import DatePicker from 'react-datepicker'
 import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react'
 import { applyExpensesFilters, sortExpenses } from '../../utils/handleExpenses'
+import { updateProjectLocally } from '../../utils/handleProjectsLocal';
 
 const ExpenseTable = () => {
     const projects = useSelector(state => state.projects.projects);
@@ -77,10 +78,27 @@ const ExpenseTable = () => {
         setFilteredExpenses(sortedExpenses);
     }
 
-    const handleDeleteExpense = () => {
-        // Implement delete logic here
-        console.log('Delete Expense');
-    }
+    const handleDeleteExpense = (expenseId) => {
+        // Get a copy of the filtered expenses
+        const updatedExpenses = [...filteredExpenses];
+
+        // Find the index of the expense to be deleted
+        const expenseIndex = updatedExpenses.findIndex((expense) => expense.id == expenseId);
+
+        if (expenseIndex !== -1) {
+            // Remove the expense from the copy
+            updatedExpenses.splice(expenseIndex, 1);
+
+            // Update the filtered expenses state using the setter
+            setFilteredExpenses(updatedExpenses);
+
+            // Update the project data (see next step)
+            const updatedProject = { ...selectedProject, expenses: updatedExpenses };
+            updateProjectLocally(updatedProject);
+        } else {
+            console.error("Expense not found with ID:", expenseId);
+        }
+    };
 
     return (
         <>
@@ -184,7 +202,7 @@ const ExpenseTable = () => {
                                     <td>{expense.category}</td>
                                     <td>{expense.payee}</td>
                                     <td>
-                                        <button onClick={handleDeleteExpense} className='modal_btn bg_danger'>Delete</button>
+                                        <button onClick={() => handleDeleteExpense(expense.id)} className='modal_btn bg_danger'>Delete</button>
                                     </td>
                                 </tr>
                             ))
