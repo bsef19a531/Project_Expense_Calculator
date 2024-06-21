@@ -23,8 +23,8 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
     const projectCategories = selectedProject.categories;
     const projectPayees = selectedProject.payees;
 
-    const [projectAmount, setProjectAmount] = useState('');
-    const [selectedDate, setSelectedDate] = useState(new Date().toISOString().slice(0, 10));
+    const [projectAmount, setProjectAmount] = useState(1);
+    const [selectedDate, setSelectedDate] = useState(new Date());
     const [selectedCategory, setSelectedCategory] = useState(projectCategories[0] || null);
     const [selectedPayee, setSelectedPayee] = useState(projectPayees[0] || null);
     const [isDisabled, setIsDisabled] = useState(true);
@@ -50,7 +50,7 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
 
         const expense = {
             id: `exp_${Date.now()}`,
-            amount: projectAmount,
+            amount: projectAmount > 0 ? projectAmount : -1 * projectAmount,
             category: selectedCategory,
             payee: selectedPayee,
             date: selectedDate.toISOString().slice(0, 10)
@@ -62,7 +62,7 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
         dispatch(saveProjects(updatedProjects));
 
         setProjectAmount('');
-        setSelectedDate(null);
+        setSelectedDate(new Date());
         onClose(); // Close modal
     };
 
