@@ -2,6 +2,7 @@ import React from 'react';
 import { PieChart, Pie, Tooltip, Cell } from 'recharts';
 
 
+
 const ExpensePieChart = ({ data }) => {
     const colors = [
         "#1f77b4", "#ff7f0e", "#2ca02c", "#d62728", "#9467bd",
@@ -17,7 +18,7 @@ const ExpensePieChart = ({ data }) => {
     return (
         <>
             <h3 className='title'>Category-wise Expense Distribution</h3>
-            <PieChart width={600} height={400} style={{ margin: '0 auto' }}>
+            {data.length === 0 ? <p style={{ marginLeft: "20px", padding: "20px" }}>No data available</p> : <PieChart width={600} height={400} style={{ margin: '0 auto' }}>
                 <Pie
                     data={data}
                     cx={200}
@@ -32,6 +33,8 @@ const ExpensePieChart = ({ data }) => {
                 </Pie>
                 <Tooltip /> {/* Add tooltip for hover information */}
             </PieChart>
+            }
+
         </>
     );
 };

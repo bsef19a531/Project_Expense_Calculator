@@ -192,7 +192,7 @@ const ExpenseTable = () => {
                         }
                         < tr >
                             <td colSpan="5" className="total_amount_row">
-                                Total Amount: {filteredExpenses.reduce((total, expense) => total + Number(expense.amount), 0)}
+                                <b>Total Amount: {filteredExpenses.reduce((total, expense) => total + Number(expense.amount), 0)}</b>
                             </td>
                         </tr>
                     </tbody>

@@ -12,12 +12,12 @@ const Stats = () => {
 
     const projects = useSelector(state => state.projects.projects);
     const selectedProjectId = useSelector(state => state.selectedProject.selectedProjectId);
-    let selectedProject = projects.filter(project => project.id === selectedProjectId)[0];
+    let selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
     const [pieChartData, setPieChartData] = useState(getCategorywiseTotalExpense(selectedProject ? selectedProject : {}));
     const [lineChartData, setLineChartData] = useState(getExpenseTrendsData(selectedProject ? selectedProject : {}));
 
     useEffect(() => {
-        selectedProject = projects.filter(project => project.id === selectedProjectId)[0];
+        selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
         setPieChartData(getCategorywiseTotalExpense(selectedProject ? selectedProject : {}));
         setLineChartData(getExpenseTrendsData(selectedProject ? selectedProject : {}));
     }, [selectedProjectId, projects]);
@@ -32,8 +32,8 @@ const Stats = () => {
             <h2 className={styles.title} >Stats</h2>
             <ExpenseLoanInfoCard />
             <ExpenseTable />
-            {pieChartData && <ExpensePieChart data={pieChartData} />}
-            {lineChartData && <ExpenseLineChart data={lineChartData} />}
+            <ExpensePieChart data={pieChartData} />
+            <ExpenseLineChart data={lineChartData} />
         </>
     )
 }
