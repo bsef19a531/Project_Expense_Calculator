@@ -14,7 +14,6 @@ const ExpenseBarChart = ({ data }) => {
 
     return (
         <>
-            <h3 className='title' style={{ margin: "20px" }} >Monthly Category-wise Expense</h3>
             {data.length === 0 ? <p style={{ marginLeft: "20px", padding: "0px 20px" }}>No data available</p> : <ResponsiveContainer width="95%" height={400}>
                 <BarChart
                     data={data}

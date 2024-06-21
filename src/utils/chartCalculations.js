@@ -21,6 +21,29 @@ export const getCategorywiseTotalExpense = (project) => {
     return pieChartData;
 };
 
+export const getPayeewiseTotalExpense = (project) => {
+    if (!project || !project.expenses || project.expenses.length === 0) { return []; }
+
+    // Calculate total expense
+    const totalExpense = project.expenses.reduce((acc, expense) => acc + Number(expense.amount), 0);
+
+    const payeeExpenses = project.expenses.reduce((acc, expense) => {
+        const payee = expense.payee;
+        const amount = Number(expense.amount);
+        acc[payee] = (acc[payee] || 0) + amount;
+        return acc;
+    }, {});
+
+    const pieChartData = Object.entries(payeeExpenses).map(([payee, amount]) => ({
+        name: payee,
+        value: amount,
+        // Calculate and add percentage
+        percent: Math.round((amount / totalExpense) * 100),
+    }));
+
+    return pieChartData;
+};
+
 export const getExpenseTrendsData = (project) => {
     // Check if project has expenses
     if (!project || !project.expenses || project.expenses.length === 0) {
@@ -118,3 +141,4 @@ export const getCategorywiseMonthlyExpense = (project) => {
 
     return formattedData;
 }
+

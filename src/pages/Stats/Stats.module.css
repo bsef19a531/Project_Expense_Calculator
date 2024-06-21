@@ -9,6 +9,12 @@
     margin: 0px 20px;
 }
 
+.chart_title {
+    padding: 20px;
+    background: var(--light-gray);
+    border-radius: 10px;
+}
+
 .proj_container {
     background-color: var(--light-gray);
     border-radius: 10px;
@@ -39,4 +45,14 @@
     border-radius: 10px;
     border: none;
     cursor: pointer;
+}
+
+.pie_chart_container {
+    display: flex;
+    justify-content: space-around
+}
+
+.pie_chart_container>div {
+    padding: 0px 10px;
+    width: 100%;
 }

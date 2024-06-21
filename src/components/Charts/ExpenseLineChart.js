@@ -9,7 +9,7 @@ const ExpenseLineChart = ({ data }) => {
     });
     return (
         <>
-            <h3 style={{ margin: "20px" }}>Monthly Expense Trends</h3>
+
             {data.length === 0 ? <p style={{ marginLeft: "20px", padding: " 0px 20px" }}>No data available</p> :
                 <ResponsiveContainer width="95%" height={500}>
                     <LineChart data={sortedData} style={{ margin: "0 auto" }}>

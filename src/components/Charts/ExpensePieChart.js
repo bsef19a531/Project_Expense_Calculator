@@ -7,7 +7,6 @@ const ExpensePieChart = ({ data }) => {
 
     return (
         <>
-            <h3 className='title'>Category-wise Expense Distribution</h3>
             {data.length === 0 ? <p style={{ marginLeft: "20px", padding: "20px" }}>No data available</p> :
                 <ResponsiveContainer width="100%" height={400}>
                     <PieChart style={{ margin: '0 auto' }}>
