@@ -2,15 +2,20 @@ import React, { useState, useEffect } from 'react';
 import styles from './SideHeader.module.css';
 import logo from '../../assets/cal-logo.jpg';
 import { Link } from 'react-router-dom';
-import AddProjectModal from '../Modals/AddProjectModal';
+import CustomModal from '../Modals/CustomModal';
+import EditProjectModal from '../Modals/EditProjectModal';
 import { useSelector } from 'react-redux';
 import { setSelectedProject as setSelectedProjectId } from '../../redux/selectedProjectSlice';
 import { useDispatch } from 'react-redux';
+import { saveProjects } from '../../redux/projectsSlice';
+import { createProject, storeProjectsLocally } from '../../utils/handleProjectsLocal';
 
 const SideHeader = () => {
+    // console.log("SideHeader");
     const dispatch = useDispatch();
 
     const [isModalOpen, setIsModalOpen] = useState(false);
+    const [isEditModalOpen, setIsEditModalOpen] = useState(false);
 
     const openModal = () => {
         setIsModalOpen(true);
@@ -20,32 +25,37 @@ const SideHeader = () => {
         setIsModalOpen(false);
     };
 
-    const handleCreateProject = (projectName) => {
-        console.log('Creating project:', projectName);
+    const openEditModal = () => {
+        setIsEditModalOpen(true);
+    };
 
+    const handleCreateProject = (projectName) => {
+        const newProject = createProject(projectName);
+        storeProjectsLocally(newProject);
+        dispatch(saveProjects([...projects, newProject]));
     };
 
     const projects = useSelector((state) => state.projects.projects);
     const selectedProjectId = useSelector((state) => state.selectedProject.selectedProjectId);
-    const [selectedProject, setSelectedProject] = useState(projects[0]?.name || 'None');
+
+    const [selectedProject, setSelectedProject] = useState(
+        selectedProjectId ? projects.filter(project => project.id === selectedProjectId)[0]?.name || 'None' : ''
+    );
 
     useEffect(() => {
-        // Handle potential situations where projects might be empty initially
-        if (projects.length > 0 && !selectedProject) {
-            setSelectedProject(projects[0].name);
-        }
-        if (selectedProject !== 'None') {
-            dispatch(setSelectedProjectId(projects.filter(project => selectedProject === selectedProject)[0].id));
-            console.log('Selected project from useEffect:', selectedProjectId);
-        }
-    }, [projects]);
+        let projectToSave = projects.filter(project => selectedProject == project.id)[0]?.id || projects[0]?.id;
 
+        dispatch(setSelectedProjectId(projectToSave)); // Update ID based on selectedProject
+    }, [projects]);
 
     const handleProjectChange = (event) => {
         setSelectedProject(event.target.value);
         dispatch(setSelectedProjectId(event.target.value)); // Use selectedProject as ID directly
     };
 
+    // console.log("SideHeader selectedProject", selectedProject);
+    // console.log("SideHeader selectedProjectId", selectedProjectId);
+    // console.log("SideHeader projects", projects);
 
     return (
         <div className={styles.container}>
@@ -69,13 +79,17 @@ const SideHeader = () => {
                 <p>*Actions</p>
                 <button className={styles.menu_btn} onClick={openModal}>Add Project</button>
 
-                <AddProjectModal
+                <CustomModal
                     isOpen={isModalOpen}
                     onClose={closeModal}
                     onCreateProject={handleCreateProject}
+                    heading="Add Project"
+                    palceholder="Enter Project Name"
                 />
 
-                <button className={styles.menu_btn}>Edit Project</button>
+                <button className={styles.menu_btn} onClick={openEditModal}>Edit Project</button>
+
+                <EditProjectModal isOpen={isEditModalOpen} onClose={() => setIsEditModalOpen(false)} />
 
                 <p>*Select Project</p>
                 <div>
@@ -87,7 +101,6 @@ const SideHeader = () => {
                         ))}
                     </select>
                 </div>
-
             </div>
         </div>
     );

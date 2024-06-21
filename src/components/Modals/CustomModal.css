@@ -57,3 +57,75 @@
     cursor: pointer;
     border: none;
 }
+
+.bg_danger {
+    background-color: var(--danger);
+}
+
+.modal_select_menu {
+    width: 100%;
+    border: var(--dark-gray);
+    height: 36px;
+    background-color: var(--white);
+    text-align: center;
+    box-shadow: 0px 2px;
+}
+
+.f_dir_col {
+    flex-direction: column;
+}
+
+.f_dir_row {
+    flex-direction: row;
+}
+
+.expense_container_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.project_expense_input {
+    padding: 10px;
+    border-radius: 10px;
+    border: 1px solid var(--dark-gray);
+    margin: 10px 0px;
+    min-width: 150px;
+    width: 200px;
+}
+
+.project_expense_datepicker {
+    padding: 10px !important;
+    border-radius: 10px;
+    border: 1px solid var(--dark-gray);
+    margin: 10px 0px;
+    min-width: 150px;
+    width: 200px;
+}
+
+.w-200 {
+    width: 200px;
+    min-width: 150px;
+}
+
+.w-350 {
+    width: 350px;
+    min-width: 150px;
+}
+
+.mt-10 {
+    margin-top: 10px;
+}
+
+button:disabled {
+    color: var(--danger);
+    cursor: not-allowed;
+}
+
+.edit_modal_section {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+}

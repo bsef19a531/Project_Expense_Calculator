@@ -1,0 +1,82 @@
+.table_container {
+    width: 100%;
+    max-width: 1700px;
+    overflow: scroll;
+    max-height: 434px;
+    margin: 20px 0px;
+    padding: 0px 20px;
+}
+
+.title {
+    font-weight: 600;
+    margin: 0px 20px;
+}
+
+.expense_table {
+    width: 100%;
+    border-collapse: collapse;
+    border-radius: 10px;
+}
+
+.expense_table th {
+    padding: 10px;
+    text-align: left;
+    background-color: var(--dark-gray);
+    color: var(--white);
+    font-weight: bold;
+}
+
+.expense_table td {
+    padding: 10px;
+    text-align: left;
+    border-bottom: 1px solid #ddd;
+}
+
+.expense_table tr:nth-child(even) {
+    background-color: #f9f9f9;
+}
+
+.expense_table tr:hover {
+    background-color: #f5f5f5;
+}
+
+.para {
+    width: 100%;
+    margin: 10px;
+    font-weight: bold;
+}
+
+.filter_container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0px 20px;
+}
+
+.filter_date_picker {
+    width: 150px;
+}
+
+.filters_section {
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+
+}
+
+.clear_btn {
+    background-color: var(--light-gray);
+    color: var(--dark-gray);
+}
+
+.sort_container {
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    padding: 0px 20px;
+    gap: 20px;
+}
+
+.w_150 {
+    width: 150px;
+}
