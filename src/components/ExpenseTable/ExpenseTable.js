@@ -6,8 +6,14 @@ import 'react-datepicker/dist/react-datepicker.css';
 import { useState } from 'react'
 import { applyExpensesFilters, sortExpenses } from '../../utils/handleExpenses'
 import { updateProjectLocally } from '../../utils/handleProjectsLocal';
+import { setSelectedProject } from '../../redux/selectedProjectSlice';
+import { useDispatch } from 'react-redux';
+import { saveProjects } from '../../redux/projectsSlice';
 
 const ExpenseTable = () => {
+
+    const dispatch = useDispatch();
+
     const projects = useSelector(state => state.projects.projects);
     const selectedProjectId = useSelector(state => state.selectedProject.selectedProjectId);
     const selectedProject = projects.filter(project => project.id == selectedProjectId)[0];
@@ -90,11 +96,14 @@ const ExpenseTable = () => {
             updatedExpenses.splice(expenseIndex, 1);
 
             // Update the filtered expenses state using the setter
-            setFilteredExpenses(updatedExpenses);
+
 
             // Update the project data (see next step)
             const updatedProject = { ...selectedProject, expenses: updatedExpenses };
-            updateProjectLocally(updatedProject);
+            const updatedProjects = updateProjectLocally(updatedProject);
+            setFilteredExpenses(updatedExpenses);
+            // setSelectedProject(updatedProject);
+            dispatch(saveProjects([...updatedProjects]));
         } else {
             console.error("Expense not found with ID:", expenseId);
         }
