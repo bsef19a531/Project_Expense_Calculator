@@ -10,6 +10,9 @@ import { setSelectedProject } from '../../redux/selectedProjectSlice';
 import { useDispatch } from 'react-redux';
 import { saveProjects } from '../../redux/projectsSlice';
 import exportFromJSON from 'export-from-json';
+import jsPDF from 'jspdf';
+import html2canvas from 'html2canvas';
+import generatePDF from '../../utils/generatePDFReport';
 
 const ExpenseTable = () => {
 
@@ -123,6 +126,10 @@ const ExpenseTable = () => {
         exportFromJSON({ data, fileName, exportType });
     };
 
+    const handleGeneratePDF = () => {
+        generatePDF();
+    }
+
     return (
         <>
             <div>
@@ -206,6 +213,7 @@ const ExpenseTable = () => {
                     </div>
                     <div className='export_btn_container'>
                         <button className='modal_btn' onClick={handleExport}>Export Data</button>
+                        <button className='modal_btn' onClick={handleGeneratePDF}>Generate Report</button>
                     </div>
 
                 </div>

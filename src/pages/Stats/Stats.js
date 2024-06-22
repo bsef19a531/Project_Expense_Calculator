@@ -32,7 +32,7 @@ const Stats = () => {
             <h2 className={styles.title} >Stats</h2>
             <ExpenseLoanInfoCard />
             <ExpenseTable />
-            <div className={styles.pie_chart_container}>
+            <div id="pie_chart_container" className={styles.pie_chart_container}>
                 <div>
                     <h3 className={styles.chart_title}>Category-wise Expense Distribution</h3>
                     <ExpensePieChart data={pieChartData} />
@@ -42,10 +42,14 @@ const Stats = () => {
                     <ExpensePieChart data={pieChartPayeeData} />
                 </div>
             </div>
-            <h3 style={{ margin: "20px" }} className={styles.chart_title}>Monthly Expense Trends</h3>
-            <ExpenseLineChart data={lineChartData} />
-            <h3 style={{ margin: "20px" }} className={styles.chart_title} >Monthly Category-wise Expense</h3>
-            <ExpenseBarChart data={barChartData} />
+            <div id="line_chart_container">
+                <h3 style={{ margin: "20px" }} className={styles.chart_title}>Monthly Expense Trends</h3>
+                <ExpenseLineChart data={lineChartData} />
+            </div>
+            <div id="bar_chart_container">
+                <h3 style={{ margin: "20px" }} className={styles.chart_title} >Monthly Category-wise Expense</h3>
+                <ExpenseBarChart data={barChartData} />
+            </div>
         </>
     )
 }
