@@ -76,8 +76,8 @@ const EditProjectModal = ({ isOpen, onClose }) => {
                     </div>
                 </div>
                 <div className='edit_btn_container'>
-                    <button className='modal_btn mt-10' onClick={handleSaveChanges}>Save</button>
                     <button className='modal_btn mt-10 btn_red' onClick={handleDeleteProject}>Delete</button>
+                    <button className='modal_btn mt-10' onClick={handleSaveChanges}>Save</button>
                 </div>
             </div>
         </Modal>
