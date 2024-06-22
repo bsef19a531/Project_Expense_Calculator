@@ -19,7 +19,7 @@ const ExpensePieChart = ({ data }) => {
                             label={(data) => `${data.name} (${data.percent})`}
                         >
                             {data.map((entry, index) => (
-                                <Cell key={`cell-${index}`} fill={`#${Math.floor(Math.random() * 16777215).toString(16)}`} />
+                                <Cell key={`cell-${index}`} fill={`#${Math.floor(Math.random() * 52936771).toString(16)}`} />
                             ))}
                         </Pie>
                         <Tooltip /> {/* Add tooltip for hover information */}
