@@ -27,12 +27,6 @@ const Stats = () => {
         setBarChartData(getCategorywiseMonthlyExpense(selectedProject ? selectedProject : {}));
     }, [selectedProjectId, projects]);
 
-
-    console.log('selectedProject', selectedProject);
-    console.log('pieChartData', pieChartData);
-    console.log('lineChartData', lineChartData);
-    console.log('barChartData', barChartData);
-
     return (
         <>
             <h2 className={styles.title} >Stats</h2>

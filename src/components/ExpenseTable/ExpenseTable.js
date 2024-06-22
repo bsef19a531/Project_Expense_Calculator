@@ -234,7 +234,11 @@ const ExpenseTable = () => {
                                     </td>
                                 </tr>
                             ))
-                                : <p className='para'>No Data Available...</p>
+                                : <tr>
+                                    <td colSpan="5" className="total_amount_row">
+                                        No data available...
+                                    </td>
+                                </tr>
                         }
                         < tr >
                             <td colSpan="5" className="total_amount_row">
