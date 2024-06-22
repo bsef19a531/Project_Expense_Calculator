@@ -1,0 +1,68 @@
+.about-page {
+    font-family: Arial, sans-serif;
+    padding: 20px;
+}
+
+.about-header {
+    text-align: center;
+    margin-bottom: 50px;
+    background-color: var(--light-gray);
+    border-radius: 10px;
+    padding: 20px;
+}
+
+.features-section,
+.how-it-works-section,
+.screenshots-section,
+.team-section,
+.contact-section,
+.testimonials-section,
+.faqs-section {
+    margin: 25px 0px;
+}
+
+.how-it-works-section {
+    padding: 0px 20px;
+}
+
+.features-grid,
+.team-grid,
+.screenshots-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 20px;
+    justify-content: center;
+}
+
+.feature-card,
+.team-card,
+.screenshot-card {
+    background-color: var(--light-gray);
+    border-radius: 8px;
+    padding: 20px;
+    text-align: center;
+    width: 200px;
+}
+
+.team-card img {
+    border-radius: 50%;
+    width: 100px;
+    height: 100px;
+    object-fit: cover;
+}
+
+.contact-section a {
+    color: #007BFF;
+    text-decoration: none;
+}
+
+.testimonial {
+    background-color: var(--light-gray);
+    padding: 20px;
+    border-radius: 8px;
+    text-align: center;
+}
+
+.faq {
+    margin-bottom: 20px;
+}
