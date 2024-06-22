@@ -1,16 +1,9 @@
-import React from 'react'
-import Modal from 'react-modal'
-import './CustomModal.css'
-import { useSelector } from 'react-redux'
-import { useState } from 'react'
-
+import React, { useState, useEffect } from 'react';
+import Modal from 'react-modal';
+import './CustomModal.css';
+import { useSelector } from 'react-redux';
 
 const CustomSelectorModal = ({ isOpen, onClose, handler, heading, selector }) => {
-
-    // console.log("CustomSelectorModal");
-
-    const [selectedValue, setSelectedValue] = useState();
-
 
     const selectedProjectId = useSelector((state) => state.selectedProject.selectedProjectId) || 0;
     const projects = useSelector((state) => state.projects.projects) || [];
@@ -24,11 +17,16 @@ const CustomSelectorModal = ({ isOpen, onClose, handler, heading, selector }) =>
         selection = project.payees || ["None"];
     }
 
+    const [selectedValue, setSelectedValue] = useState(selection[0]);
+
+    useEffect(() => {
+        setSelectedValue(selection[0]);
+    }, [selection]);
+
     const handleValueDelete = () => {
         handler(selectedValue);
         onClose();
     }
-
 
     const handleValueChange = (event) => {
         setSelectedValue(event.target.value);
@@ -52,11 +50,10 @@ const CustomSelectorModal = ({ isOpen, onClose, handler, heading, selector }) =>
                 }
                 {
                     selection.length > 0 ? <button className='modal_btn bg_danger' onClick={handleValueDelete}>Delete</button> : <></>
-
                 }
             </div>
         </Modal>
     )
 }
 
-export default CustomSelectorModal
+export default CustomSelectorModal;

@@ -9,6 +9,7 @@ import { updateBtnDisbledState } from '../../utils/generalFunctions'
 import { addExpenseToProject, updateProjectLocally } from '../../utils/handleProjectsLocal'
 import { saveProjects } from '../../redux/projectsSlice'
 import { useDispatch } from 'react-redux'
+import { toast } from 'react-toastify'
 
 const ExpenseModal = ({ isOpen, onClose, handler }) => {
 
@@ -24,8 +25,8 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
 
     const [projectAmount, setProjectAmount] = useState(1);
     const [selectedDate, setSelectedDate] = useState(new Date());
-    const [selectedCategory, setSelectedCategory] = useState(projectCategories[0] || null);
-    const [selectedPayee, setSelectedPayee] = useState(projectPayees[0] || null);
+    const [selectedCategory, setSelectedCategory] = useState(projectCategories[0]);
+    const [selectedPayee, setSelectedPayee] = useState(projectPayees[0]);
     const [isDisabled, setIsDisabled] = useState(true);
 
     const handleCategoryChange = (event) => {
@@ -47,6 +48,19 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
 
     const handleCreateExpense = () => {
 
+        if (projectAmount == '' || projectAmount <= 0) {
+            toast.error('Please enter a valid amount!');
+            return;
+        }
+        if (selectedCategory == null || selectedCategory == '') {
+            toast.error('Please select a category!');
+            return;
+        }
+        if (selectedPayee == null || selectedPayee == '') {
+            toast.error('Please select a payee!');
+            return;
+        }
+
         const expense = {
             id: `exp_${Date.now()}`,
             amount: projectAmount > 0 ? projectAmount : -1 * projectAmount,
@@ -62,6 +76,8 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
 
         setProjectAmount('');
         setSelectedDate(new Date());
+
+        toast.success('Expense added successfully!');
     };
 
     return (
