@@ -3,7 +3,7 @@ import Modal from 'react-modal';
 import './CustomModal.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveProjects } from '../../redux/projectsSlice';
-import { updateProjectLocally } from '../../utils/handleProjectsLocal';
+import { updateProjectLocally, saveProjectsLocally } from '../../utils/handleProjectsLocal';
 
 const EditProjectModal = ({ isOpen, onClose }) => {
     const dispatch = useDispatch();
@@ -39,7 +39,7 @@ const EditProjectModal = ({ isOpen, onClose }) => {
 
     const handleDeleteProject = () => {
         const updatedProjects = projects.filter(project => project.id != selectedProjectId);
-        console.log('updatedProjects', updatedProjects);
+        saveProjectsLocally(updatedProjects);
         dispatch(saveProjects(updatedProjects));
         onClose();
     };

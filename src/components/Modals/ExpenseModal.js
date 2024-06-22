@@ -62,7 +62,6 @@ const ExpenseModal = ({ isOpen, onClose, handler }) => {
 
         setProjectAmount('');
         setSelectedDate(new Date());
-        onClose(); // Close modal
     };
 
     return (

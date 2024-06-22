@@ -81,19 +81,16 @@ export const getExpenseTrendsData = (project) => {
         return acc;
     }, {});
 
-    console.log('expensesByPeriod', expensesByPeriod);
 
     // Combine data with zero expenses for missing months
     const chartData = allMonths.map((month) => {
-        console.log('Month:', month);
-        console.log('Expense:', expensesByPeriod[month]);
         return {
             timePeriod: month,
             expense: expensesByPeriod[month] || 0, // Use expense if available, otherwise 0
         };
     });
 
-    console.log('chartData', chartData);
+
 
     return chartData;
 };

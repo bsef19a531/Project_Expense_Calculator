@@ -27,6 +27,9 @@ function App() {
       if (projects.length > 0) {
         setIsProjectsEmpty(true);
       }
+      else {
+        setIsProjectsEmpty(false);
+      }
     }
   }, [projects]);
 
