@@ -6,6 +6,7 @@ import { saveProjects } from '../../redux/projectsSlice'
 import { capitalizeString } from '../../utils/generalFunctions'
 import CustomSelectorModal from '../../components/Modals/CustomSelectorModal'
 import ExpenseModal from '../../components/Modals/ExpenseModal'
+import { toast } from 'react-toastify';
 
 const Home = () => {
 
@@ -27,6 +28,7 @@ const Home = () => {
         const updatedProjects = updateProjectLocally(updatedProject);
         dispatch(saveProjects(updatedProjects));
         setCategory('');
+        if (category.length !== 0) { toast.success('Category added successfully!'); }
     }
 
     const [payee, setPayee] = useState('');
@@ -37,6 +39,7 @@ const Home = () => {
         const updatedProjects = updateProjectLocally(updatedProject);
         dispatch(saveProjects(updatedProjects));
         setPayee('');
+        if (payee.length !== 0) { toast.success('Payee added successfully!'); }
     }
 
     const [isModalOpenCategory, setIsModalOpenCategory] = useState(false);
@@ -68,14 +71,18 @@ const Home = () => {
     };
 
     const handleDeleteCategory = (category) => {
+        console.log("category", category);
         const updatedProject = deleteProjectCategory(selectedProject, category);
+        console.log("updatedProject from delete category", updatedProject);
         const updatedProjects = updateProjectLocally(updatedProject);
         dispatch(saveProjects(updatedProjects));
+        toast.info('Category deleted successfully!');
     }
     const handleDeletePayee = (payee) => {
         const updatedProject = deleteProjectPayee(selectedProject, payee);
         const updatedProjects = updateProjectLocally(updatedProject);
         dispatch(saveProjects(updatedProjects));
+        toast.info('Payee deleted successfully!');
     }
 
     const handleAddExpense = (expense) => {

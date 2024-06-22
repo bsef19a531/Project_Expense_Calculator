@@ -9,6 +9,8 @@ import { getProjectsLocally } from './utils/handleProjectsLocal';
 import { useDispatch, useSelector } from 'react-redux';
 import CreateProject from './components/CreateProject/CreateProject';
 import { saveProjects } from './redux/projectsSlice';
+import { ToastContainer } from 'react-toastify';
+import 'react-toastify/dist/ReactToastify.css';
 
 function App() {
 
@@ -27,13 +29,18 @@ function App() {
       if (projects.length > 0) {
         setIsProjectsEmpty(true);
       }
+      else {
+        setIsProjectsEmpty(false);
+      }
     }
   }, [projects]);
 
   // console.log("App");
   return (
     loading ? <Loader /> :
+
       <Router>
+        <ToastContainer position="bottom-right" autoClose={2000} />
         <div className="app-container">
           <TopHeader />
           <div className='page-area'>

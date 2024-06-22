@@ -68,6 +68,17 @@ export const updateProjectLocally = (updatedProject) => {
     return projects;
 }
 
+export const saveProjectsLocally = (projects) => {
+    // Ensure projects is a valid array
+    if (!Array.isArray(projects)) {
+        throw new Error('Argument "projects" must be an array');
+    }
+
+    // Save the projects array to local storage
+    localStorage.setItem('projects', JSON.stringify(projects));
+};
+
+
 export const calculateProjectTotalExpense = (project) => {
     if (!project.expenses) return 0;
     let totalAmount = 0;
