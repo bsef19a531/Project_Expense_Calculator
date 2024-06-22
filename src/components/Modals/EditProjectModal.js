@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import Modal from 'react-modal';
 import './CustomModal.css';
-// import './EditProjectModal.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { saveProjects } from '../../redux/projectsSlice';
 import { updateProjectLocally } from '../../utils/handleProjectsLocal';
@@ -38,6 +37,14 @@ const EditProjectModal = ({ isOpen, onClose }) => {
         onClose();
     };
 
+    const handleDeleteProject = () => {
+        const updatedProjects = projects.filter(project => project.id != selectedProjectId);
+        console.log('updatedProjects', updatedProjects);
+        dispatch(saveProjects(updatedProjects));
+        onClose();
+    };
+
+
     return (
         <Modal className="add_project_modal" isOpen={isOpen} onRequestClose={onClose}>
             <div className='modal_header'>
@@ -68,7 +75,10 @@ const EditProjectModal = ({ isOpen, onClose }) => {
                         </select>
                     </div>
                 </div>
-                <button className='modal_btn mt-10' onClick={handleSaveChanges}>Save</button>
+                <div className='edit_btn_container'>
+                    <button className='modal_btn mt-10' onClick={handleSaveChanges}>Save</button>
+                    <button className='modal_btn mt-10 btn_red' onClick={handleDeleteProject}>Delete</button>
+                </div>
             </div>
         </Modal>
     );

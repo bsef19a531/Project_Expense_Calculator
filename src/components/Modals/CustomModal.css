@@ -129,3 +129,15 @@ button:disabled {
     justify-content: space-between;
     width: 100%;
 }
+
+.edit_btn_container {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: stretch;
+    width: 100%;
+}
+
+.btn_red {
+    background-color: var(--danger);
+}

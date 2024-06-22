@@ -9,6 +9,7 @@ import { updateProjectLocally } from '../../utils/handleProjectsLocal';
 import { setSelectedProject } from '../../redux/selectedProjectSlice';
 import { useDispatch } from 'react-redux';
 import { saveProjects } from '../../redux/projectsSlice';
+import exportFromJSON from 'export-from-json';
 
 const ExpenseTable = () => {
 
@@ -109,6 +110,19 @@ const ExpenseTable = () => {
         }
     };
 
+    const handleExport = () => {
+        const data = filteredExpenses.map(expense => ({
+            Date: expense.date,
+            Amount: expense.amount,
+            Category: expense.category,
+            Payee: expense.payee,
+        }));
+        const fileName = 'project_expenses';
+        const exportType = 'csv';
+
+        exportFromJSON({ data, fileName, exportType });
+    };
+
     return (
         <>
             <div>
@@ -178,21 +192,26 @@ const ExpenseTable = () => {
                 </div>
 
                 <div className='sort_container'>
-                    <h5>Sort By</h5>
-                    <select className='modal_select_menu w_150' value={sort} onChange={handleSortChange}>
-                        <option value='amount'>Amount</option>
-                        <option value='date'>Date</option>
-                    </select>
+                    <div className='sort_container_sort'>
+                        <h5>Sort By</h5>
+                        <select className='modal_select_menu w_150' value={sort} onChange={handleSortChange}>
+                            <option value='amount'>Amount</option>
+                            <option value='date'>Date</option>
+                        </select>
 
-                    <select className='modal_select_menu w_150' value={sortBy} onChange={handleSortOperation}>
-                        <option value='asc'>Ascending</option>
-                        <option value='desc'>Decending</option>
-                    </select>
+                        <select className='modal_select_menu w_150' value={sortBy} onChange={handleSortOperation}>
+                            <option value='asc'>Ascending</option>
+                            <option value='desc'>Decending</option>
+                        </select>
+                    </div>
+                    <div className='export_btn_container'>
+                        <button className='modal_btn' onClick={handleExport}>Export Data</button>
+                    </div>
 
                 </div>
             </div>
             <div className='table_container'>
-                <table className='expense_table'>
+                <table className='expense_table' id="expense_data_table">
                     <thead>
                         <tr>
                             <th>Date</th>
