@@ -44,7 +44,7 @@
 }
 
 .menu ul li:hover {
-    background-color: var(--white);
+    /* background-color: var(--white); */
     border-left: 3px solid var(--dark-gray);
     border-radius: 10px;
     cursor: pointer;
@@ -75,4 +75,11 @@
     background-color: var(--white);
     text-align: center;
     box-shadow: 0px 2px;
+}
+
+.is_selected {
+    background-color: var(--white);
+    border-left: 3px solid var(--dark-gray);
+    border-radius: 10px;
+    cursor: pointer;
 }
