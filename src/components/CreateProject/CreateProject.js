@@ -17,11 +17,13 @@ const CreateProject = () => {
 
     const handleSubmit = (event) => {
         event.preventDefault(); // Prevent default form submission behavior
-        const newProject = createProject(projectName);
-        storeProjectsLocally(newProject);
+        if (projectName.trim() !== "") {
+            const newProject = createProject(projectName);
+            storeProjectsLocally(newProject);
 
-        dispatch(saveProjects([...projects, newProject]));
-        setProjectName(""); // Clear input field after submission
+            dispatch(saveProjects([...projects, newProject]));
+            setProjectName(""); // Clear input field after submission
+        }
     };
 
     return (

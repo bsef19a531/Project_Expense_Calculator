@@ -6,6 +6,7 @@ const AddProjectModal = ({ isOpen, onClose, onCreateProject, heading, placeholde
     const [projectName, setProjectName] = useState('');
 
     const handleCreateProject = () => {
+        if (projectName.trim() === '') return;
         onCreateProject(projectName);
         setProjectName(''); // Clear project name input
         onClose(); // Close modal

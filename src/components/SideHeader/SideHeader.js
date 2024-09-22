@@ -31,7 +31,6 @@ const SideHeader = () => {
     };
 
     const handleCreateProject = (projectName) => {
-        if (projectName !== '') return;
         const newProject = createProject(projectName);
         storeProjectsLocally(newProject);
         dispatch(saveProjects([...projects, newProject]));

@@ -33,7 +33,6 @@ const Home = () => {
 
     const [payee, setPayee] = useState('');
     const handleAddPayee = () => {
-        console.log("handleAddPayee");
         const capitalizedCategory = capitalizeString(payee);
         const updatedProject = updateProjectPayees(selectedProject, capitalizedCategory);
         const updatedProjects = updateProjectLocally(updatedProject);
@@ -71,7 +70,6 @@ const Home = () => {
     };
 
     const handleDeleteCategory = (category) => {
-        console.log("category", category);
         const updatedProject = deleteProjectCategory(selectedProject, category);
         console.log("updatedProject from delete category", updatedProject);
         const updatedProjects = updateProjectLocally(updatedProject);
