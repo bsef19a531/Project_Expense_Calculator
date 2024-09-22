@@ -56,7 +56,7 @@ const AboutPage = () => {
             <section className="team-section">
                 <div className="team-grid">
                     <div className="team-card">
-                        <img src="team-member1.jpg" alt="Team Member 1" />
+                        <img src="" alt="Team Member 1" />
                         <h3>Mohammad Abdullah Abid</h3>
                         <p>Lead Developer</p>
                     </div>
